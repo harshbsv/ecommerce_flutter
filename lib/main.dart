@@ -119,7 +119,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: new ListView(
         children: <Widget>[
-          image_carousel
+          //image carousel begins here.
+          image_carousel,
+          //padding widget
+          new Padding(padding: const EdgeInsets.all(10.0),
+          child: new Text('Categories'),),
+          //Horizontal list view begins here
+
         ],
       ),
     );
