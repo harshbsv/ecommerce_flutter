@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:ecommerceflutter/components/products.dart';
+import 'package:ecommerceflutter/components/horizontal_listview.dart';
+import 'package:ecommerceflutter/pages/product_details.dart';
 
 void main(){
   runApp(
@@ -42,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.pink,
-        title: Text('Shopper\'s Bazar'),
+        title: Text('Buy It'),
         actions: <Widget>[
           new IconButton(icon: Icon(Icons.search, color: Colors.white,), onPressed: (){}),
           new IconButton(icon: Icon(Icons.shopping_cart, color: Colors.white,), onPressed: (){})
@@ -123,9 +126,15 @@ class _HomePageState extends State<HomePage> {
           image_carousel,
           //padding widget
           new Padding(padding: const EdgeInsets.all(10.0),
-          child: new Text('Categories'),),
+          child: new Text('Categories', textScaleFactor: 1.0,),),
           //Horizontal list view begins here
-
+          HorizontalList(),
+          new Padding(padding: const EdgeInsets.all(10.0),
+            child: new Text('Recent Products', textScaleFactor: 1.0,),),
+          Container(
+            height: 320.0,
+            child: Products(),
+          ),
         ],
       ),
     );
