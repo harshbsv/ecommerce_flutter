@@ -21,37 +21,37 @@ class _ProductsState extends State<Products> {
       "price": "\$ 50.00",
     },
     {
-      "name": "Women's Dresses",
+      "name": "Dresses 1",
       "picture": "images/products/dress1.jpeg",
       "old_price": "\$ 120.00",
       "price": "\$ 85.00",
     },
     {
-      "name": "Women's Dresses",
+      "name": "Dresses 2",
       "picture": "images/products/dress2.jpeg",
       "old_price": "\$ 100.00",
       "price": "\$ 50.00",
     },
     {
-      "name": "Heels",
+      "name": "Heels 1",
       "picture": "images/products/hills1.jpeg",
       "old_price": "\$ 120.00",
       "price": "\$ 85.00",
     },
     {
-      "name": "Heels",
+      "name": "Heels 2",
       "picture": "images/products/hills2.jpeg",
       "old_price": "\$ 100.00",
       "price": "\$ 50.00",
     },
     {
-      "name": "Pants",
+      "name": "Pants 1",
       "picture": "images/products/pants1.jpg",
       "old_price": "\$ 120.00",
       "price": "\$ 85.00",
     },
     {
-      "name": "Pants",
+      "name": "Pants 2",
       "picture": "images/products/pants2.jpeg",
       "old_price": "\$ 100.00",
       "price": "\$ 50.00",
@@ -63,19 +63,19 @@ class _ProductsState extends State<Products> {
       "price": "\$ 85.00",
     },
     {
-      "name": "Skirts",
+      "name": "Skirts 1",
       "picture": "images/products/skt1.jpeg",
       "old_price": "\$ 100.00",
       "price": "\$ 50.00",
     },
     {
-      "name": "Skirts",
+      "name": "Skirts 2",
       "picture": "images/products/skt2.jpeg",
       "old_price": "\$ 120.00",
       "price": "\$ 85.00",
     },
     {
-      "name": "Skirts",
+      "name": "Skirts 3",
       "picture": "images/products/skt2.jpeg",
       "old_price": "\$ 120.00",
       "price": "\$ 85.00",
@@ -118,7 +118,13 @@ class Single_prod extends StatelessWidget {
           tag: prod_name,
           child: Material(
             child: InkWell(
-              onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new ProductDetails())),
+              onTap: ()=> Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new ProductDetails(
+                //passing values of products to the productdetails page
+                product_detail_name: prod_name,
+                product_detail_new_price: prod_price,
+                product_detail_old_price: prod_old_price,
+                product_detail_picture: prod_picture,
+              ))),
               child: GridTile(
                 child: Image.asset(prod_picture, fit: BoxFit.cover,),
                 footer: Container(
