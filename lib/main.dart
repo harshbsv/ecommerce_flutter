@@ -3,6 +3,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:ecommerceflutter/components/products.dart';
 import 'package:ecommerceflutter/components/horizontal_listview.dart';
 import 'package:ecommerceflutter/pages/product_details.dart';
+import 'package:ecommerceflutter/pages/cart.dart';
 
 void main(){
   runApp(
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
         dotSize: 4.0,
         dotColor: Colors.pink,
         indicatorBgPadding: 5.0,
+        dotBgColor: Colors.transparent,
       ),
     );
     return Scaffold(
@@ -48,7 +50,9 @@ class _HomePageState extends State<HomePage> {
         title: Text('Buy It'),
         actions: <Widget>[
           new IconButton(icon: Icon(Icons.search, color: Colors.white,), onPressed: (){}),
-          new IconButton(icon: Icon(Icons.shopping_cart, color: Colors.white,), onPressed: (){})
+          new IconButton(icon: Icon(Icons.shopping_cart, color: Colors.white,), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart()));
+          })
         ],
       ),
       drawer: new Drawer(
@@ -68,7 +72,9 @@ class _HomePageState extends State<HomePage> {
             ),
             // Body
           InkWell(
-            onTap: (){},
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> new HomePage()));
+            },
             child: ListTile(
               title: Text('Home Page'),
               leading: Icon(Icons.home, color: Colors.red,),
@@ -89,10 +95,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart()));
+              },
               child: ListTile(
-                title: Text('Categories'),
-                leading: Icon(Icons.category, color: Colors.red,),
+                title: Text('Shopping Cart'),
+                leading: Icon(Icons.shopping_cart, color: Colors.red,),
               ),
             ),
             InkWell(
