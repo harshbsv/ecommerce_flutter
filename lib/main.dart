@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
         images: [
           AssetImage("images/c1.jpg"),
           AssetImage("images/m1.jpeg"),
-          AssetImage("images/m2.jpg"),
           AssetImage("images/w1.jpeg"),
           AssetImage("images/w3.jpeg"),
           AssetImage("images/w4.jpeg"),
