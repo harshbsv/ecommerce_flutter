@@ -64,31 +64,108 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Image.asset("images/loginbackground.jpg", fit: BoxFit.cover, width: double.infinity,),
+          Image.asset("images/loginbackground.jpg", fit: BoxFit.fill, width: double.infinity, height: double.infinity,),
           Container(
             alignment: Alignment.topCenter,
             child: Image.asset("images/logo.png"),
-            width: 550.0,
-            height: 200.0,
+            width: double.infinity,
+            height: double.infinity,
           ),
-          Container(
-            alignment: Alignment.center,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.white.withOpacity(0.5),
-                    elevation: 0.0,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "Email",
-                          icon: Icon(Icons.email),
+          Padding(
+            padding: const EdgeInsets.only(top: 300.0),
+            child: Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.white.withOpacity(0.8),
+                        elevation: 0.0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12.0,),
+                          child: TextFormField(
+                            controller: _emailTextController,
+                            decoration: InputDecoration(
+                                hintText: "Email",
+                                icon: Icon(Icons.alternate_email),
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                RegExp regex = new RegExp(pattern);
+                                if (!regex.hasMatch(value))
+                                  return 'Please make sure your email address is valid';
+                                else
+                                  return null;
+                              }
+                            },
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.white.withOpacity(0.8),
+                        elevation: 0.0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12.0,),
+                          child: TextFormField(
+                            controller: _passwordTextController,
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              icon: Icon(Icons.lock_outline),
+                            ),
+                            validator: (value){
+                              if(value.isEmpty){
+                                return "The password field cannot be empty";
+                              }else if(value.length < 6){
+                                return "the password has to be at least 6 characters long";
+                              }
+                              return null;
+                            }
+                          ),
+                        ),
+                      ),
+                    ),
+                    // LOGIN BUTTON:
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.blue,
+                        elevation: 0.0,
+                        child: MaterialButton(
+                          onPressed: (){},
+                          minWidth: MediaQuery.of(context).size.width,
+                          child: Text("Login",textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.bold)),
+                        ),
+                        ),
+                      ),
+                    Expanded(child: Container()),
+                    Divider(color: Colors.white,),
+                    Text("Other Sign-in options", style: TextStyle(color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.bold)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.red,
+                        elevation: 0.0,
+                        child: MaterialButton(
+                          onPressed: (){
+                            handleSignIn();
+                          },
+                          minWidth: MediaQuery.of(context).size.width,
+                          child: Text("Google",textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                    ],
+                ),
               ),
             ),
           ),
@@ -106,18 +183,6 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
-            child: FlatButton(
-              color: Colors.red.shade900,
-              onPressed: (){
-                handleSignIn();
-              },
-              child: Text("Sign-in / Sign-up with Google", style: TextStyle(color: Colors.white),),
-            ),
-          ),
-        ),
     );
   }
 }
