@@ -1,5 +1,6 @@
 import 'package:ecommerceflutter/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +17,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = new GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedIn = false;
@@ -58,21 +62,34 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text("Login", style: TextStyle(color: Colors.red.shade900),),
-        elevation: 0.1,
-      ),
       body: Stack(
         children: <Widget>[
-          Center(
-            child: FlatButton(
-              color: Colors.red.shade900,
-              onPressed: (){
-                handleSignIn();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-            }, child: Text("Sign-in / Sign-up with Google", style: TextStyle(color: Colors.white),),
+          Image.asset("images/loginbackground.jpg", fit: BoxFit.cover, width: double.infinity,),
+          Container(
+            alignment: Alignment.topCenter,
+            child: Image.asset("images/logo.png"),
+            width: 550.0,
+            height: 200.0,
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Material(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.white.withOpacity(0.5),
+                    elevation: 0.0,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Email",
+                          icon: Icon(Icons.email),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Visibility(
@@ -89,6 +106,18 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
+      bottomNavigationBar: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
+            child: FlatButton(
+              color: Colors.red.shade900,
+              onPressed: (){
+                handleSignIn();
+              },
+              child: Text("Sign-in / Sign-up with Google", style: TextStyle(color: Colors.white),),
+            ),
+          ),
+        ),
     );
   }
 }
